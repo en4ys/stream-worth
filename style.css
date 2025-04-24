@@ -1,0 +1,396 @@
+/* RESET */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote::before, blockquote::after,
+q::before, q::after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* FONT */
+@font-face {
+  font-family: 'Apple Garamond Light';
+  src: url('fonts/apple_garamond/AppleGaramond-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* BASE STYLES */
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'IBM Plex Mono', monospace;
+  background: white;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+.container {
+  padding: 5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-family: 'Apple Garamond Light', serif;
+  font-size: 3.5rem;
+  margin-bottom: 2rem;
+  letter-spacing: -0.3px;
+  filter: blur(0.5px);
+}
+
+.tape-scroll-area {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  overflow-x: scroll;
+  width: 100vw;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+.tape-scroll-area::-webkit-scrollbar {
+  display: none;
+}
+
+.tape-track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 400px;
+  padding-left: 475px; /* or try 3rem if it still clips */
+
+}
+
+.cassette-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 550px;
+  height: auto;
+  margin-right: 2rem;
+  flex-shrink: 0;
+}
+
+.cassette {
+  width: 100%;
+  position: relative;
+}
+
+.cassette-body {
+  width: 100%;
+  display: block;
+}
+
+.reel {
+  position: absolute;
+  width: 61px;
+  top: 44%;
+  transform: translateY(-50%);
+  animation: spin 2s linear infinite;
+  animation-play-state: paused;
+}
+.left {
+  left: 123px;
+}
+.right {
+  right: 133px;
+}
+@keyframes spin {
+  from {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+#tape-extension {
+  width: 0px;
+  position: absolute;
+  height: 6px;
+  background: black;
+  top: 51%;
+  left: 96%;
+  transform: translateY(-50%);
+  z-index: 1;
+  transition: width 0.5s ease;
+  min-width: 2px;
+  max-height: 6px;
+}
+
+#tape-extension.slow {
+  transition: width 1.5s ease;
+}
+
+.tick-line {
+  position: absolute;
+  top: 51%;
+  left: 96%;
+  height: 1px;
+  border-top: 2px dotted #9d0909;
+  transform: translateY(-50%);
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease-in;
+}
+
+.tick-line.visible {
+  opacity: 1
+}
+
+.tick {
+  position: absolute;
+  top: -6px;
+  width: 1px;
+  height: 14px;
+  background-color: #9d0909;
+}
+.tick span {
+  position: absolute;
+  top: 18px;
+  left: -10px;
+  color: #9d0909;
+  font-size: 0.8rem;
+}
+
+.skip-link {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 2rem;
+  padding: 0.5rem 1rem;
+  background: none;
+  color: #9d0909;
+  font-size: 0.8rem;
+  font-family: inherit;
+  text-decoration: none;
+  border: 1px dotted #9d0909;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 999;
+  transition: background 0.2s ease;
+}
+
+.skip-link:hover {
+  background: #9d0909;
+  color: white;
+  border: 1px dotted white;
+}
+
+
+.form-wrapper {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  margin-top: 2rem;
+}
+.form-wrapper label {
+  font-weight: 500;
+  letter-spacing: -0.2px;
+}
+.inputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+input,
+select,
+button {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid black;
+  background: white;
+  font-family: inherit;
+}
+
+#earningsText {
+  opacity: 0;
+  font-weight: 500;
+  color: #9d0909;
+  font-size: 1.2rem;
+  letter-spacing: -0.7px;
+  margin-top: 1.5rem;
+  transition: opacity 0.5s ease;
+}
+
+#earningsText.visible {
+  opacity: 1;
+}
+
+.final-message {
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 1rem 2rem;
+  border: 1px dashed #9d0909;
+  font-size: 2rem;
+  color: #9d0909;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.final-message.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.info-icon {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 1000;
+  color: #9d0909;
+}
+
+.info-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 0;
+  width: 300px;
+  background: white;
+  border: 1px dashed #9d0909;
+  padding: 0.75rem;
+  font-size: 0.8rem;
+  color: #333;
+  text-align: left;
+  line-height: 1.3;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.info-icon:hover .info-tooltip {
+  display: block;
+}
+
+.calculate-btn {
+  padding: 0.5rem 1rem;
+  background: none;
+  color: #9d0909;
+  font-size: 1rem;
+  font-family: inherit;
+  text-decoration: none;
+  border: 1px dotted #9d0909;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 999;
+  transition: background 0.3s ease;
+}
+
+.calculate-btn:hover {
+  background: #9d0909;
+  color: white;
+  border: 1px dotted white;
+}
+
+.reset-btn {
+  padding: 0.5rem 1rem;
+  background: none;
+  color: #9d0909;
+  font-size: 1rem;
+  font-family: inherit;
+  text-decoration: none;
+  border: 1px dotted #9d0909;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 999;
+  transition: background 0.2s ease;
+}
+
+.reset-btn:hover {
+  background: #9d0909;
+  color: white;
+  border: 1px dotted white;
+}
+
+#platformSelect {
+  padding: 0.5rem 1rem;
+  background: none;
+  color: #9d0909;
+  font-size: 1rem;
+  font-family: inherit;
+  text-decoration: none;
+  border: 1px dotted #9d0909;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 999;
+  transition: background 0.2s ease;
+}
+
+#streamInput {
+  padding: 0.5rem 1rem;
+  background: none;
+  color: #9d0909;
+  font-size: 1.1rem;
+  font-family: inherit;
+  text-decoration: none;
+  border: 1px dotted #9d0909;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 999;
+  transition: background 0.2s ease;
+}
+
+.texture-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* makes sure users can still click through */
+  background: url("assets/clean-gray-paper-1920x1080.png") repeat;
+  background-size: cover;
+  opacity: 6.5; /* adjust to taste */
+  z-index: 9999; /* make sure it's on top */
+  mix-blend-mode: multiply; /* optional for that gritty vibe */
+}
